@@ -1,0 +1,56 @@
+{
+  "name": "whatsdesktop",
+  "productName": "WhatsDesktop",
+  "version": "0.1.0",
+  "description": "Unofficial WhatsApp app",
+  "license": "MIT",
+  "repository": "mawie81/whatsdesktop",
+  "author": {
+    "name": "Marcel Wiehle",
+    "email": "marcel@wiehle.me",
+    "url": "http://marcel.wiehle.me"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "electronVersion": "0.33.3",
+  "scripts": {
+    "test": "xo",
+    "start": "electron .",
+    "build": "npm run build-osx && npm run build-linux",
+    "build-osx": "electron-packager . $npm_package_productName --overwrite --out=dist --ignore='^/dist$' --ignore='^/media$' --prune --platform=darwin --arch=x64 --icon=media/logo-symbol.icns --app-bundle-id=me.wiehle.marcel.whatsdesktop --app-version=$npm_package_version --version=$npm_package_electronVersion && cd dist/WhatsDesktop-darwin-x64 && zip -ryXq9 ../WhatsDesktop-${npm_package_version}.zip WhatsDesktop.app",
+    "build-linux": "electron-packager . $npm_package_productName --overwrite --out=dist --ignore='^/dist$' --ignore='^/media/(?!logo-symbol.png$).*' --prune --platform=linux --arch=x64 --app-bundle-id=me.wiehle.marcel.whatsdesktop --app-version=$npm_package_version --version=$npm_package_electronVersion && cd dist/WhatsDesktop-linux-x64/ && zip -ryq9 ../WhatsDesktop-linux-\"$npm_package_version\".zip *"
+  },
+  "files": [
+    "index.js",
+    "menu.js",
+    "media/logo-symbol.icns"
+  ],
+  "keywords": [
+    "electron-app",
+    "WhatsApp",
+    "messenger",
+    "chat",
+    "instant",
+    "messaging",
+    "WhatsDesktop"
+  ],
+  "dependencies": {
+    "electron-debug": "^0.2.1"
+  },
+  "devDependencies": {
+    "electron-packager": "^5.1.0",
+    "electron-prebuilt": "^0.33.3",
+    "xo": "*"
+  },
+  "xo": {
+    "esnext": true,
+    "envs": [
+      "node",
+      "browser"
+    ],
+    "ignores": [
+      "dist/**"
+    ]
+  }
+}
