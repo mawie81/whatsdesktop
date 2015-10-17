@@ -5,7 +5,7 @@
 <br>
 [![](media/screenshot.png)](https://github.com/mawie81/whatsdesktop/releases/latest)
 
-*Requires OS X 10.8+ or Linux. Windows support planned.*
+*Requires OS X 10.8+, Linux or Windows.*
 
 ## Install
 
@@ -35,6 +35,12 @@ Terminal=false
 Type=Application
 Icon=/full/path/to/folder/WhatsDesktop/resources/app/media/logo-symbol.png
 ```
+
+### Windows
+
+[**Download**](https://github.com/mawie81/whatsdesktop/releases/latest) and unzip to some location.
+
+Run WhatsDesktop.exe
 
 ## Dev
 
