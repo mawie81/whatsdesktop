@@ -31,7 +31,7 @@ function createMainWindow() {
 		'show': false,
 		'width': 1000,
 		'height': 800,
-		'icon': path.join(__dirname, 'media', 'logo-symbol.png'),
+		//'icon': path.join(__dirname, 'media', 'logo-symbol.png'),
 		'min-width': 400,
 		'min-height': 200,
 	//	'title-bar-style': 'hidden-inset',

@@ -150,16 +150,6 @@ const linuxTpl = [
 				label: 'Paste',
 				accelerator: 'CmdOrCtrl+V',
 				role: 'paste'
-			},
-			{
-				type: 'separator'
-			},
-			{
-				label: 'Preferences',
-				accelerator: 'CmdOrCtrl+,',
-				click() {
-					sendAction('show-preferences');
-				}
 			}
 		]
 	},
