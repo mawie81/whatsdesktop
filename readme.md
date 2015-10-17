@@ -11,6 +11,12 @@
 
 ### OS X
 
+#### [Homebrew Cask](http://caskroom.io)
+
+```
+$ brew cask install whatsdesktop
+```
+
 #### Manually
 
 [**Download**](https://github.com/mawie81/whatsdesktop/releases/latest), unzip, and move `WhatsDesktop.app` to the `/Applications` directory.
