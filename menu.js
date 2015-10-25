@@ -6,11 +6,34 @@ const BrowserWindow = require('browser-window');
 const shell = require('shell');
 const appName = app.getName();
 
+function restoreWindow() {
+  const win = BrowserWindow.getAllWindows()[0];
+	win.show();
+  return win;
+}
+
 function sendAction(action) {
-	const win = BrowserWindow.getAllWindows()[0];
-	win.restore();
+	const win = restoreWindow();
 	win.webContents.send(action);
 }
+
+const trayTpl = [
+  {
+    label: 'Show',
+    click() {
+      restoreWindow();
+    }
+  },
+  {
+    type: 'separator'
+  },
+  {
+    label: `Quit ${appName}`,
+    click() {
+      app.quit();
+    }
+  }
+]
 
 const darwinTpl = [
 	{
@@ -192,4 +215,7 @@ if (process.platform === 'darwin') {
 
 tpl[tpl.length - 1].submenu = helpSubmenu;
 
-module.exports = Menu.buildFromTemplate(tpl);
+module.exports = {
+  mainMenu: Menu.buildFromTemplate(tpl),
+  trayMenu: Menu.buildFromTemplate(trayTpl)
+}

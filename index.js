@@ -6,11 +6,13 @@ const BrowserWindow = require('browser-window');
 const shell = require('shell');
 const Menu = require('menu');
 const appMenu = require('./menu');
+const Tray = require('tray');
 
 require('electron-debug')();
 require('crash-reporter').start();
 
 let mainWindow;
+let appIcon;
 
 function updateBadge(title) {
 	if (!app.dock) {
@@ -21,7 +23,10 @@ function updateBadge(title) {
 	app.dock.setBadge(messageCount ? messageCount[1] : '');
 
   if (messageCount) {
-      app.dock.bounce('informational');
+    appIcon.setImage(path.join(__dirname, 'media', 'media/logo-blue.png'));
+    app.dock.bounce('informational');
+  } else {
+    appIcon.setImage(path.join(__dirname, 'media', 'logo-tray.png'));
   }
 }
 
@@ -59,10 +64,17 @@ function createMainWindow() {
   return win;
 }
 
+function createTray() {
+  appIcon = new Tray(path.join(__dirname, 'media', 'logo-tray.png'));
+  appIcon.setPressedImage(path.join(__dirname, 'media', 'logo-white.png'));
+  appIcon.setContextMenu(appMenu.trayMenu);
+}
+
 app.on('ready', () => {
-	Menu.setApplicationMenu(appMenu);
+	Menu.setApplicationMenu(appMenu.mainMenu);
 
 	mainWindow = createMainWindow();
+  createTray();
 
 	const page = mainWindow.webContents;
 
