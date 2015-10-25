@@ -15,16 +15,19 @@ let mainWindow;
 let appIcon;
 
 function updateBadge(title) {
-	if (!app.dock) {
-		return;
-	}
+	let isOSX = !!app.dock;
 
 	const messageCount = (/\(([0-9]+)\)/).exec(title);
-	app.dock.setBadge(messageCount ? messageCount[1] : '');
+
+	if (isOSX) {
+		app.dock.setBadge(messageCount ? messageCount[1] : '');
+		if (messageCount) {
+			app.dock.bounce('informational');
+		}
+	}
 
   if (messageCount) {
-    appIcon.setImage(path.join(__dirname, 'media', 'media/logo-blue.png'));
-    app.dock.bounce('informational');
+    appIcon.setImage(path.join(__dirname, 'media', 'media/logo-blue.png'));    
   } else {
     appIcon.setImage(path.join(__dirname, 'media', 'logo-tray.png'));
   }
@@ -64,17 +67,21 @@ function createMainWindow() {
   return win;
 }
 
-function createTray() {
+function createTray(mainWindow) {
   appIcon = new Tray(path.join(__dirname, 'media', 'logo-tray.png'));
   appIcon.setPressedImage(path.join(__dirname, 'media', 'logo-white.png'));
   appIcon.setContextMenu(appMenu.trayMenu);
+
+	appIcon.on('double-clicked', () => {
+		mainWindow.show();
+	})
 }
 
 app.on('ready', () => {
 	Menu.setApplicationMenu(appMenu.mainMenu);
 
 	mainWindow = createMainWindow();
-  createTray();
+  createTray(mainWindow);
 
 	const page = mainWindow.webContents;
 
