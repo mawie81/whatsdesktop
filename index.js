@@ -27,7 +27,7 @@ function updateBadge(title) {
 	}
 
   if (messageCount) {
-    appIcon.setImage(path.join(__dirname, 'media', 'media/logo-blue.png'));    
+    appIcon.setImage(path.join(__dirname, 'media', 'logo-blue.png'));    
   } else {
     appIcon.setImage(path.join(__dirname, 'media', 'logo-tray.png'));
   }
