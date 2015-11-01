@@ -28,7 +28,7 @@ function updateBadge(title) {
   }
 
   if (messageCount) {
-    appIcon.setImage(path.join(__dirname, 'media', 'logo-blue.png'));
+    appIcon.setImage(path.join(__dirname, 'media', 'logo-tray-blue.png'));
   } else {
     appIcon.setImage(path.join(__dirname, 'media', 'logo-tray.png'));
   }
@@ -73,7 +73,7 @@ function createMainWindow() {
 
 function createTray() {
   appIcon = new Tray(path.join(__dirname, 'media', 'logo-tray.png'));
-  appIcon.setPressedImage(path.join(__dirname, 'media', 'logo-white.png'));
+  appIcon.setPressedImage(path.join(__dirname, 'media', 'logo-tray-white.png'));
   appIcon.setContextMenu(appMenu.trayMenu);
 
   appIcon.on('double-clicked', () => {

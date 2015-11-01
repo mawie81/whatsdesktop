@@ -1,4 +1,4 @@
-# <img src="media/logo-symbol.png" width="45" align="left">&nbsp;WhatsDesktop
+# <img src="media/logo.png" width="45" align="left">&nbsp;WhatsDesktop
 
 > Unofficial WhatsApp app
 
