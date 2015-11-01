@@ -1,18 +1,19 @@
 'use strict';
 const path = require('path');
-const fs = require('fs');
 const app = require('app');
 const BrowserWindow = require('browser-window');
 const shell = require('shell');
 const Menu = require('menu');
 const appMenu = require('./menu');
 const Tray = require('tray');
-
-require('electron-debug')();
-require('crash-reporter').start();
+const windowStateKeeper = require('electron-window-state');
 
 let mainWindow;
 let appIcon;
+let mainWindowState = windowStateKeeper('main', {
+  width: 1000,
+  height: 800
+});
 
 function updateBadge(title) {
 	let isOSX = !!app.dock;
@@ -27,7 +28,7 @@ function updateBadge(title) {
 	}
 
   if (messageCount) {
-    appIcon.setImage(path.join(__dirname, 'media', 'logo-blue.png'));    
+    appIcon.setImage(path.join(__dirname, 'media', 'logo-blue.png'));
   } else {
     appIcon.setImage(path.join(__dirname, 'media', 'logo-tray.png'));
   }
@@ -37,51 +38,54 @@ function createMainWindow() {
 	const win = new BrowserWindow({
 		'title': app.getName(),
 		'show': false,
-		'width': 1000,
-		'height': 800,
-		//'icon': path.join(__dirname, 'media', 'logo-symbol.png'),
+    'x': mainWindowState.x,
+    'y': mainWindowState.y,
+    'width': mainWindowState.width,
+    'height': mainWindowState.height,
 		'min-width': 400,
 		'min-height': 200,
-	//	'title-bar-style': 'hidden-inset',
 		'web-preferences': {
-			// fails without this because of CommonJS script detection
 			'node-integration': false,
-			// required for Facebook active ping thingy
 			'web-security': false,
 			'plugins': true
 		}
-	});
+  });
+
+  if (mainWindowState.isMaximized) {
+    win.maximize();
+  }
 
 	win.loadUrl('https://web.whatsapp.com', {
     userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.52 Safari/537.36'
   });
-	win.on('closed', app.quit);
+	win.on('closed', () => app.quit);
 	win.on('page-title-updated', (e, title) => updateBadge(title));
   win.on('close', (e) => {
-    if (win.forceClose) return;
-    if (process.platform == 'darwin') {
+    if (process.platform === 'darwin' && !win.forceClose) {
       e.preventDefault();
       win.hide();
+    } else {
+      mainWindowState.saveState(win);
     }
   });
   return win;
 }
 
-function createTray(mainWindow) {
+function createTray() {
   appIcon = new Tray(path.join(__dirname, 'media', 'logo-tray.png'));
   appIcon.setPressedImage(path.join(__dirname, 'media', 'logo-white.png'));
   appIcon.setContextMenu(appMenu.trayMenu);
 
 	appIcon.on('double-clicked', () => {
 		mainWindow.show();
-	})
+	});
 }
 
 app.on('ready', () => {
 	Menu.setApplicationMenu(appMenu.mainMenu);
 
 	mainWindow = createMainWindow();
-  createTray(mainWindow);
+  createTray();
 
 	const page = mainWindow.webContents;
 
@@ -97,12 +101,12 @@ app.on('ready', () => {
   page.on('did-finish-load', () => {
     mainWindow.setTitle(app.getName());
   });
-
 });
 
 app.on('window-all-closed', () => {
-  if (process.platform != 'darwin')
+  if (process.platform !== 'darwin') {
     app.quit();
+  }
 });
 
 app.on('before-quit', () => {
