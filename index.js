@@ -16,16 +16,16 @@ let mainWindowState = windowStateKeeper('main', {
 });
 
 function updateBadge(title) {
-	let isOSX = !!app.dock;
+  let isOSX = !!app.dock;
 
-	const messageCount = (/\(([0-9]+)\)/).exec(title);
+  const messageCount = (/\(([0-9]+)\)/).exec(title);
 
-	if (isOSX) {
-		app.dock.setBadge(messageCount ? messageCount[1] : '');
-		if (messageCount) {
-			app.dock.bounce('informational');
-		}
-	}
+  if (isOSX) {
+    app.dock.setBadge(messageCount ? messageCount[1] : '');
+    if (messageCount) {
+      app.dock.bounce('informational');
+    }
+  }
 
   if (messageCount) {
     appIcon.setImage(path.join(__dirname, 'media', 'logo-blue.png'));
@@ -35,27 +35,27 @@ function updateBadge(title) {
 }
 
 function createMainWindow() {
-	const win = new BrowserWindow({
-		'title': app.getName(),
-		'show': false,
+  const win = new BrowserWindow({
+    'title': app.getName(),
+    'show': false,
     'x': mainWindowState.x,
     'y': mainWindowState.y,
     'width': mainWindowState.width,
     'height': mainWindowState.height,
-		'min-width': 400,
-		'min-height': 200,
-		'web-preferences': {
-			'node-integration': false,
-			'web-security': false,
-			'plugins': true
-		}
+    'min-width': 400,
+    'min-height': 200,
+    'web-preferences': {
+      'node-integration': false,
+      'web-security': false,
+      'plugins': true
+    }
   });
 
   if (mainWindowState.isMaximized) {
     win.maximize();
   }
 
-	win.loadUrl('https://web.whatsapp.com', {
+  win.loadUrl('https://web.whatsapp.com', {
     userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.52 Safari/537.36'
   });
 	win.on('closed', () => app.quit);
@@ -76,27 +76,27 @@ function createTray() {
   appIcon.setPressedImage(path.join(__dirname, 'media', 'logo-white.png'));
   appIcon.setContextMenu(appMenu.trayMenu);
 
-	appIcon.on('double-clicked', () => {
-		mainWindow.show();
-	});
+  appIcon.on('double-clicked', () => {
+  	mainWindow.show();
+  });
 }
 
 app.on('ready', () => {
-	Menu.setApplicationMenu(appMenu.mainMenu);
+  Menu.setApplicationMenu(appMenu.mainMenu);
 
-	mainWindow = createMainWindow();
+  mainWindow = createMainWindow();
   createTray();
 
-	const page = mainWindow.webContents;
+  const page = mainWindow.webContents;
 
-	page.on('dom-ready', () => {
-		mainWindow.show();
-	});
+  page.on('dom-ready', () => {
+    mainWindow.show();
+  });
 
-	page.on('new-window', (e, url) => {
-		e.preventDefault();
-		shell.openExternal(url);
-	});
+  page.on('new-window', (e, url) => {
+    e.preventDefault();
+    shell.openExternal(url);
+  });
 
   page.on('did-finish-load', () => {
     mainWindow.setTitle(app.getName());
