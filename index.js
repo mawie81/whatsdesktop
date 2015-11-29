@@ -1,12 +1,12 @@
 'use strict';
+const electron = require('electron');
 const path = require('path');
-const app = require('app');
-const BrowserWindow = require('browser-window');
-const shell = require('shell');
-const Menu = require('menu');
 const appMenu = require('./menu');
-const Tray = require('tray');
 const windowStateKeeper = require('electron-window-state');
+const app = electron.app;
+const BrowserWindow = electron.BrowserWindow;
+const shell = electron.shell;
+const Tray = electron.Tray;
 
 let mainWindow;
 let appIcon;
@@ -42,11 +42,11 @@ function createMainWindow() {
     'y': mainWindowState.y,
     'width': mainWindowState.width,
     'height': mainWindowState.height,
-    'min-width': 400,
-    'min-height': 200,
-    'web-preferences': {
-      'node-integration': false,
-      'web-security': false,
+    'minWidth': 400,
+    'minHeight': 200,
+    'webPreferences': {
+      'nodeIntegration': false,
+      'webSecurity': false,
       'plugins': true
     }
   });
@@ -55,7 +55,7 @@ function createMainWindow() {
     win.maximize();
   }
 
-  win.loadUrl('https://web.whatsapp.com', {
+  win.loadURL('https://web.whatsapp.com', {
     userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.52 Safari/537.36'
   });
 	win.on('closed', () => app.quit);
@@ -76,13 +76,13 @@ function createTray() {
   appIcon.setPressedImage(path.join(__dirname, 'media', 'logo-tray-white.png'));
   appIcon.setContextMenu(appMenu.trayMenu);
 
-  appIcon.on('double-clicked', () => {
+  appIcon.on('double-click', () => {
   	mainWindow.show();
   });
 }
 
 app.on('ready', () => {
-  Menu.setApplicationMenu(appMenu.mainMenu);
+  electron.Menu.setApplicationMenu(appMenu.mainMenu);
 
   mainWindow = createMainWindow();
   createTray();
