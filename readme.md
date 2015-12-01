@@ -2,6 +2,7 @@
 
 > Unofficial WhatsApp app
 
+*Heavily inspired and adapted from [Caprine](https://github.com/sindresorhus/caprine) by [Sindre Sorhus](https://github.com/sindresorhus).*
 <br>
 [![](media/screenshot.png)](https://github.com/mawie81/whatsdesktop/releases/latest)
 
