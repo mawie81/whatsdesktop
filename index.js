@@ -2,7 +2,6 @@
 const electron = require('electron');
 const path = require('path');
 const appMenu = require('./menu');
-const windowStateKeeper = require('electron-window-state');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const shell = electron.shell;
@@ -10,10 +9,6 @@ const Tray = electron.Tray;
 
 let mainWindow;
 let appIcon;
-let mainWindowState = windowStateKeeper('main', {
-  width: 1000,
-  height: 800
-});
 
 function updateBadge(title) {
   let isOSX = !!app.dock;
@@ -35,6 +30,13 @@ function updateBadge(title) {
 }
 
 function createMainWindow() {
+  const windowStateKeeper = require('electron-window-state');
+
+  let mainWindowState = windowStateKeeper({
+    defaultWidth: 1000,
+    defaultHeight: 800
+  });
+
   const win = new BrowserWindow({
     'title': app.getName(),
     'show': false,
@@ -51,9 +53,7 @@ function createMainWindow() {
     }
   });
 
-  if (mainWindowState.isMaximized) {
-    win.maximize();
-  }
+  mainWindowState.manage(win);
 
   win.loadURL('https://web.whatsapp.com', {
     userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.52 Safari/537.36'
@@ -64,8 +64,6 @@ function createMainWindow() {
     if (process.platform === 'darwin' && !win.forceClose) {
       e.preventDefault();
       win.hide();
-    } else {
-      mainWindowState.saveState(win);
     }
   });
   return win;

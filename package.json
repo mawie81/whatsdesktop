@@ -42,7 +42,7 @@
   ],
   "dependencies": {
     "electron-debug": "^0.2.1",
-    "electron-window-state": "^0.1.0"
+    "electron-window-state": "^2.0.0"
   },
   "devDependencies": {
     "electron-packager": "^5.1.0",
