@@ -4,7 +4,7 @@
 
 *Heavily inspired and adapted from [Caprine](https://github.com/sindresorhus/caprine) by [Sindre Sorhus](https://github.com/sindresorhus).*
 
-*<strong>Note:</strong> In order to use this app a WhatsApp compatible device is required.*
+*<strong>Note:</strong> In order to use this app a WhatsApp Web compatible device is required.*
 
 <br>
 [![](media/screenshot.png)](https://github.com/mawie81/whatsdesktop/releases/latest)
