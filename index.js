@@ -65,17 +65,14 @@ function createMainWindow() {
     if (process.platform === 'darwin' && !win.forceClose) {
       e.preventDefault();
       win.hide();
+    } else if (process.platform === 'win32' && configStore.get('closeToTray')) {
+      win.hide();
+      e.preventDefault();
     }
   });
   win.on('minimize', () => {
     if (process.platform === 'win32' && configStore.get('minimizeToTray')) {
       win.hide();
-    }
-  });
-  win.on('close', evt => {
-    if (process.platform === 'win32' && configStore.get('closeToTray')) {
-      win.hide();
-      evt.preventDefault();
     }
   });
   return win;
