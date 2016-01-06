@@ -12,7 +12,7 @@ let mainWindow;
 let appIcon;
 
 function updateBadge(title) {
-  let isOSX = !!app.dock;
+  const isOSX = Boolean(app.dock);
 
   const messageCount = (/\(([0-9]+)\)/).exec(title);
 
@@ -33,24 +33,24 @@ function updateBadge(title) {
 function createMainWindow() {
   const windowStateKeeper = require('electron-window-state');
 
-  let mainWindowState = windowStateKeeper({
+  const mainWindowState = windowStateKeeper({
     defaultWidth: 1000,
     defaultHeight: 800
   });
 
   const win = new BrowserWindow({
-    'title': app.getName(),
-    'show': false,
-    'x': mainWindowState.x,
-    'y': mainWindowState.y,
-    'width': mainWindowState.width,
-    'height': mainWindowState.height,
-    'minWidth': 400,
-    'minHeight': 200,
-    'webPreferences': {
-      'nodeIntegration': false,
-      'webSecurity': false,
-      'plugins': true
+    title: app.getName(),
+    show: false,
+    x: mainWindowState.x,
+    y: mainWindowState.y,
+    width: mainWindowState.width,
+    height: mainWindowState.height,
+    minWidth: 400,
+    minHeight: 200,
+    webPreferences: {
+      nodeIntegration: false,
+      webSecurity: false,
+      plugins: true
     }
   });
 
@@ -59,9 +59,9 @@ function createMainWindow() {
   win.loadURL('https://web.whatsapp.com', {
     userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36'
   });
-	win.on('closed', () => app.quit);
-	win.on('page-title-updated', (e, title) => updateBadge(title));
-  win.on('close', (e) => {
+  win.on('closed', () => app.quit);
+  win.on('page-title-updated', (e, title) => updateBadge(title));
+  win.on('close', e => {
     if (process.platform === 'darwin' && !win.forceClose) {
       e.preventDefault();
       win.hide();
@@ -72,7 +72,7 @@ function createMainWindow() {
       win.hide();
     }
   });
-  win.on('close', (evt) => {
+  win.on('close', evt => {
     if (process.platform === 'win32' && configStore.get('closeToTray')) {
       win.hide();
       evt.preventDefault();
@@ -87,7 +87,7 @@ function createTray() {
   appIcon.setContextMenu(appMenu.trayMenu);
 
   appIcon.on('double-click', () => {
-  	mainWindow.show();
+    mainWindow.show();
   });
 }
 
