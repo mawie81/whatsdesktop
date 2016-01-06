@@ -1,6 +1,7 @@
 'use strict';
 const electron = require('electron');
 const os = require('os');
+const configStore = require('./config');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const Menu = electron.Menu;
@@ -31,7 +32,7 @@ const trayTpl = [
   {
     label: `Quit ${appName}`,
     click() {
-      app.quit();
+      app.exit(0);
     }
   }
 ]
@@ -183,6 +184,54 @@ const linuxTpl = [
 	}
 ];
 
+const winTpl = [
+	{
+		label: 'Edit',
+		submenu: [
+			{
+				label: 'Cut',
+				accelerator: 'CmdOrCtrl+X',
+				role: 'cut'
+			},
+			{
+				label: 'Copy',
+				accelerator: 'CmdOrCtrl+C',
+				role: 'copy'
+			},
+			{
+				label: 'Paste',
+				accelerator: 'CmdOrCtrl+V',
+				role: 'paste'
+			}
+		]
+	},
+  {
+    label: 'Settings',
+    submenu: [
+      {
+        label: 'Minimize to tray',
+        type: 'checkbox',
+        checked: configStore.get('minimizeToTray'),
+        click(item) {
+          configStore.set('minimizeToTray', item.checked);
+        }
+      },
+      {
+        label: 'Close to tray',
+        type: 'checkbox',
+        checked: configStore.get('closeToTray'),
+        click(item) {
+          configStore.set('closeToTray', item.checked);
+        }
+      }
+    ]
+  },
+	{
+		label: 'Help',
+		role: 'help'
+	}
+];
+
 const helpSubmenu = [
 	{
 		label: `${appName} Website...`,
@@ -209,6 +258,8 @@ ${process.platform} ${process.arch} ${os.release()}`;
 let tpl;
 if (process.platform === 'darwin') {
 	tpl = darwinTpl;
+} else if (process.platform === 'win32') {
+  tpl = winTpl;
 } else {
   //use linux menu template also for windows
 	tpl = linuxTpl;

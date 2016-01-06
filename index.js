@@ -2,6 +2,7 @@
 const electron = require('electron');
 const path = require('path');
 const appMenu = require('./menu');
+const configStore = require('./config');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const shell = electron.shell;
@@ -56,7 +57,7 @@ function createMainWindow() {
   mainWindowState.manage(win);
 
   win.loadURL('https://web.whatsapp.com', {
-    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.52 Safari/537.36'
+    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36'
   });
 	win.on('closed', () => app.quit);
 	win.on('page-title-updated', (e, title) => updateBadge(title));
@@ -64,6 +65,17 @@ function createMainWindow() {
     if (process.platform === 'darwin' && !win.forceClose) {
       e.preventDefault();
       win.hide();
+    }
+  });
+  win.on('minimize', () => {
+    if (process.platform === 'win32' && configStore.get('minimizeToTray')) {
+      win.hide();
+    }
+  });
+  win.on('close', (evt) => {
+    if (process.platform === 'win32' && configStore.get('closeToTray')) {
+      win.hide();
+      evt.preventDefault();
     }
   });
   return win;
