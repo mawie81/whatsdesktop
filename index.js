@@ -41,6 +41,7 @@ function createMainWindow() {
   const win = new BrowserWindow({
     title: app.getName(),
     show: false,
+    icon: process.platform === 'linux' && path.join(__dirname, 'media', 'logo.png'),
     x: mainWindowState.x,
     y: mainWindowState.y,
     width: mainWindowState.width,
