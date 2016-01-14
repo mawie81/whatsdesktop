@@ -1,7 +1,7 @@
 {
   "name": "whatsdesktop",
   "productName": "WhatsDesktop",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Unofficial WhatsApp app",
   "license": "MIT",
   "repository": "mawie81/whatsdesktop",
@@ -13,7 +13,7 @@
   "engines": {
     "node": ">=4"
   },
-  "electronVersion": "0.36.2",
+  "electronVersion": "0.36.3",
   "scripts": {
     "test": "xo",
     "start": "electron .",
