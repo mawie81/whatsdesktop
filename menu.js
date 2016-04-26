@@ -129,18 +129,18 @@ const darwinTpl = [
       }
     ]
   }, {
-      label: 'Settings',
-      submenu: [
-        {
-          label: 'Enable dark mode',
-          type: 'checkbox',
-          checked: configStore.get('darkMode'),
-          click(item) {
-            configStore.set('darkMode', item.checked);
-            sendAction('toggleDarkMode');
-          }
+    label: 'Settings',
+    submenu: [
+      {
+        label: 'Enable dark mode',
+        type: 'checkbox',
+        checked: configStore.get('darkMode'),
+        click(item) {
+          configStore.set('darkMode', item.checked);
+          sendAction('toggleDarkMode');
         }
-      ]
+      }
+    ]
   },
   {
     label: 'Window',
@@ -201,18 +201,18 @@ const linuxTpl = [
     ]
   },
   {
-      label: 'Settings',
-      submenu: [
-        {
-          label: 'Enable dark mode',
-          type: 'checkbox',
-          checked: configStore.get('darkMode'),
-          click(item) {
-            configStore.set('darkMode', item.checked);
-            sendAction('toggleDarkMode');
-          }
+    label: 'Settings',
+    submenu: [
+      {
+        label: 'Enable dark mode',
+        type: 'checkbox',
+        checked: configStore.get('darkMode'),
+        click(item) {
+          configStore.set('darkMode', item.checked);
+          sendAction('toggleDarkMode');
         }
-      ]
+      }
+    ]
   },
   {
     label: 'Help',

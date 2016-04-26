@@ -1,7 +1,7 @@
 'use strict';
 const electron = require('electron');
 const path = require('path');
-var fs = require('fs');
+const fs = require('fs');
 const appMenu = require('./menu');
 const configStore = require('./config');
 const app = electron.app;
