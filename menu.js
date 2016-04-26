@@ -14,11 +14,25 @@ function restoreWindow() {
   return win;
 }
 
+function sendAction(action) {
+  const win = BrowserWindow.getAllWindows()[0];
+  win.webContents.send(action);
+}
+
 const trayTpl = [
   {
     label: 'Show',
     click() {
       restoreWindow();
+    }
+  },
+  {
+    label: 'Enable dark mode',
+    type: 'checkbox',
+    checked: configStore.get('darkMode'),
+    click(item) {
+      configStore.set('darkMode', item.checked);
+      sendAction('toggleDarkMode');
     }
   },
   {
@@ -114,6 +128,19 @@ const darwinTpl = [
         role: 'selectall'
       }
     ]
+  }, {
+      label: 'Settings',
+      submenu: [
+        {
+          label: 'Enable dark mode',
+          type: 'checkbox',
+          checked: configStore.get('darkMode'),
+          click(item) {
+            configStore.set('darkMode', item.checked);
+            sendAction('toggleDarkMode');
+          }
+        }
+      ]
   },
   {
     label: 'Window',
@@ -174,6 +201,20 @@ const linuxTpl = [
     ]
   },
   {
+      label: 'Settings',
+      submenu: [
+        {
+          label: 'Enable dark mode',
+          type: 'checkbox',
+          checked: configStore.get('darkMode'),
+          click(item) {
+            configStore.set('darkMode', item.checked);
+            sendAction('toggleDarkMode');
+          }
+        }
+      ]
+  },
+  {
     label: 'Help',
     role: 'help'
   }
@@ -217,6 +258,15 @@ const winTpl = [
         checked: configStore.get('closeToTray'),
         click(item) {
           configStore.set('closeToTray', item.checked);
+        }
+      },
+      {
+        label: 'Enable dark mode',
+        type: 'checkbox',
+        checked: configStore.get('darkMode'),
+        click(item) {
+          configStore.set('darkMode', item.checked);
+          sendAction('toggleDarkMode');
         }
       }
     ]
