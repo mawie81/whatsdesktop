@@ -34,7 +34,7 @@ html.dark-mode .cont-input-search, html.dark-mode .block-compose, html.dark-mode
 html.dark-mode .icon-search, html.dark-mode .icon-chat, html.dark-mode .icon-menu,
 html.dark-mode .icon-pencil, html.dark-mode .icon-smiley, html.dark-mode .icon-ptt,
 html.dark-mode .icon-hide, html.dark-mode .icon-x, html.dark-mode .icon-clip,
-html.dark-mode .context-icon {
+html.dark-mode .context-icon, html.dark-mode .icon-down {
   -webkit-filter: invert(100%);
 }
 
