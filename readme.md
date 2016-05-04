@@ -11,6 +11,11 @@
 
 *Requires OS X 10.8+, Linux or Windows.*
 
+## Dark mode
+
+Enable the dark mode in the settings or tray menu.
+[![](media/screenshot-dark.png)](https://github.com/mawie81/whatsdesktop/releases/latest)
+
 ## Install
 
 ### OS X
