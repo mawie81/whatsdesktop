@@ -1,11 +1,7 @@
 'use strict';
-const electron = require('electron');
+const {app, BrowserWindow, Menu, shell} = require('electron');
 const os = require('os');
 const configStore = require('./config');
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
-const Menu = electron.Menu;
-const shell = electron.shell;
 const appName = app.getName();
 
 function restoreWindow() {

@@ -1,13 +1,9 @@
 'use strict';
-const electron = require('electron');
 const path = require('path');
 const fs = require('fs');
 const appMenu = require('./menu');
 const configStore = require('./config');
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
-const shell = electron.shell;
-const Tray = electron.Tray;
+const {app, BrowserWindow, shell, Tray, Menu} = require('electron');
 
 let mainWindow;
 let appIcon;
@@ -92,7 +88,7 @@ function createTray() {
 }
 
 app.on('ready', () => {
-  electron.Menu.setApplicationMenu(appMenu.mainMenu);
+  Menu.setApplicationMenu(appMenu.mainMenu);
 
   mainWindow = createMainWindow();
   createTray();
@@ -124,6 +120,6 @@ app.on('before-quit', () => {
   mainWindow.forceClose = true;
 });
 
-app.on('activate-with-no-open-windows', () => {
+app.on('activate', () => {
   mainWindow.show();
 });
