@@ -11,4 +11,6 @@ ipc.on('toggleDarkMode', () => {
   toggleDarkMode();
 });
 
-toggleDarkMode();
+document.addEventListener('DOMContentLoaded', () => {
+  toggleDarkMode();
+});
