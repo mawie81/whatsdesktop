@@ -42,6 +42,36 @@ const trayTpl = [
   }
 ];
 
+const viewTpl = {
+  label: 'View',
+  submenu: [
+    {
+      label: 'Reset Text Size',
+      accelerator: 'CmdOrCtrl+0',
+      click() {
+        configStore.set('zoomLevel', 0);
+        sendAction('updateZoomLevel');
+      }
+    },
+    {
+      label: 'Increase Text Size',
+      accelerator: 'CmdOrCtrl+Plus',
+      click() {
+        configStore.set('zoomLevel', configStore.get('zoomLevel')+1);
+        sendAction('updateZoomLevel');
+      }
+    },
+    {
+      label: 'Decrease Text Size',
+      accelerator: 'CmdOrCtrl+-',
+      click() {
+        configStore.set('zoomLevel', configStore.get('zoomLevel')-1);
+        sendAction('updateZoomLevel');
+      }
+    }
+  ]
+};
+
 const darwinTpl = [
   {
     label: appName,
@@ -138,6 +168,7 @@ const darwinTpl = [
       }
     ]
   },
+  viewTpl,
   {
     label: 'Window',
     role: 'window',
@@ -210,6 +241,7 @@ const linuxTpl = [
       }
     ]
   },
+  viewTpl,
   {
     label: 'Help',
     role: 'help'
@@ -267,6 +299,7 @@ const winTpl = [
       }
     ]
   },
+  viewTpl,
   {
     label: 'Help',
     role: 'help'

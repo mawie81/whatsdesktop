@@ -6,6 +6,7 @@ module.exports = new Config({
   defaults: {
     darkMode: false,
     closeToTray: false,
-    minimizeToTray: false
+    minimizeToTray: false,
+    zoomLevel: 0
   }
 });

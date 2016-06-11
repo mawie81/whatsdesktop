@@ -7,10 +7,15 @@ function toggleDarkMode() {
   document.documentElement.classList.toggle('dark-mode', configStore.get('darkMode'));
 }
 
-ipc.on('toggleDarkMode', () => {
-  toggleDarkMode();
-});
+function updateZoomLevel() {
+  electron.webFrame.setZoomLevel(configStore.get('zoomLevel'));
+}
+
+ipc.on('toggleDarkMode', toggleDarkMode);
+
+ipc.on('updateZoomLevel', updateZoomLevel);
 
 document.addEventListener('DOMContentLoaded', () => {
   toggleDarkMode();
+  updateZoomLevel()
 });
