@@ -17,5 +17,5 @@ ipc.on('updateZoomLevel', updateZoomLevel);
 
 document.addEventListener('DOMContentLoaded', () => {
   toggleDarkMode();
-  updateZoomLevel()
+  updateZoomLevel();
 });

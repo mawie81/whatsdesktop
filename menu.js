@@ -57,7 +57,7 @@ const viewTpl = {
       label: 'Increase Text Size',
       accelerator: 'CmdOrCtrl+Plus',
       click() {
-        configStore.set('zoomLevel', configStore.get('zoomLevel')+1);
+        configStore.set('zoomLevel', configStore.get('zoomLevel') + 1);
         sendAction('updateZoomLevel');
       }
     },
@@ -65,7 +65,7 @@ const viewTpl = {
       label: 'Decrease Text Size',
       accelerator: 'CmdOrCtrl+-',
       click() {
-        configStore.set('zoomLevel', configStore.get('zoomLevel')-1);
+        configStore.set('zoomLevel', configStore.get('zoomLevel') - 1);
         sendAction('updateZoomLevel');
       }
     }
