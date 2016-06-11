@@ -13,7 +13,7 @@
   "engines": {
     "node": ">=4"
   },
-  "electronVersion": "1.1.1",
+  "electronVersion": "1.2.2",
   "scripts": {
     "test": "xo",
     "start": "electron .",
@@ -41,12 +41,13 @@
     "WhatsDesktop"
   ],
   "dependencies": {
+    "electron-config": "^0.1.1",
     "electron-debug": "^0.2.1",
     "electron-window-state": "^3.0.0"
   },
   "devDependencies": {
     "electron-packager": "^7.0.0",
-    "electron-prebuilt": "^1.1.1",
+    "electron-prebuilt": "^1.2.2",
     "xo": "*"
   },
   "xo": {
