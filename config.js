@@ -1,22 +1,11 @@
 'use strict';
-const app = require('electron').app;
-const fs = require('fs');
-const path = require('path');
-const configFile = path.join(app.getPath('userData'), 'config.json');
 
-function readConfigFile() {
-  try {
-    return JSON.parse(fs.readFileSync(configFile));
-  } catch (err) {
-    return {};
+const Config = require('electron-config');
+
+module.exports = new Config({
+  defaults: {
+    darkMode: false,
+    closeToTray: false,
+    minimizeToTray: false
   }
-}
-
-module.exports = {
-  set: (key, value) => {
-    const config = readConfigFile();
-    config[key] = value;
-    fs.writeFileSync(configFile, JSON.stringify(config));
-  },
-  get: key => readConfigFile()[key]
-};
+});
