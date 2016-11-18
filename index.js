@@ -1,9 +1,9 @@
 'use strict';
 const path = require('path');
 const fs = require('fs');
+const {app, BrowserWindow, shell, Tray, Menu} = require('electron');
 const appMenu = require('./menu');
 const configStore = require('./config');
-const {app, BrowserWindow, shell, Tray, Menu} = require('electron');
 
 let mainWindow;
 let appIcon;

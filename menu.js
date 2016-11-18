@@ -2,6 +2,7 @@
 const {app, BrowserWindow, Menu, shell} = require('electron');
 const os = require('os');
 const configStore = require('./config');
+
 const appName = app.getName();
 
 function restoreWindow() {

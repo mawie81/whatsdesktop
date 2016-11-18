@@ -1,5 +1,6 @@
 'use strict';
 const electron = require('electron');
+
 const ipc = electron.ipcRenderer;
 const configStore = electron.remote.require('./config');
 
