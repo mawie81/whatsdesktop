@@ -17,16 +17,11 @@
   "scripts": {
     "test": "xo",
     "start": "electron .",
-    "build": "npm run build-osx && npm run build-linux && npm run build-windows",
-    "build-osx": "electron-packager . $npm_package_productName --overwrite --out=dist --ignore='^/dist$' --prune --platform=darwin --arch=x64 --icon=media/logo.icns --app-bundle-id=me.wiehle.marcel.whatsdesktop  --version=$npm_package_electronVersion && cd dist/WhatsDesktop-darwin-x64 && zip -ryXq9 ../WhatsDesktop-osx-${npm_package_version}.zip WhatsDesktop.app",
-    "build-mas": "electron-packager . $npm_package_productName --overwrite --out=dist --ignore='^/dist$' --prune --platform=mas --arch=x64 --icon=media/logo.icns --app-bundle-id=me.wiehle.marcel.whatsdesktop --app-version=$npm_package_version --version=$npm_package_electronVersion && cd dist/WhatsDesktop-mas-x64 && zip -ryXq9 ../WhatsDesktop-mas-${npm_package_version}.zip WhatsDesktop.app",
-    "build-linux": "electron-packager . $npm_package_productName --overwrite --out=dist --ignore='^/dist$' --prune --platform=linux --arch=x64 --app-bundle-id=me.wiehle.marcel.whatsdesktop --app-version=$npm_package_version --version=$npm_package_electronVersion && cd dist/WhatsDesktop-linux-x64/ && zip -ryq9 ../WhatsDesktop-linux-\"$npm_package_version\".zip *",
-    "build-windows": "electron-packager . $npm_package_productName --overwrite --out=dist --ignore='^/dist$' --prune --platform=win32 --arch=ia32 --icon=media/logo.ico --version=$npm_package_electronVersion --version-string.ProductName=$npm_package_productName --app-version=$npm_package_version && cd dist/WhatsDesktop-win32-ia32/ && zip -ryq9 ../WhatsDesktop-win32-\"$npm_package_version\".zip *"
+    "build": "build -mwl"
   },
   "files": [
     "index.js",
     "menu.js",
-    "media/logo.icns",
     "media/logo-tray.png",
     "media/logo-tray-white.png",
     "media/logo-tray-blue.png"
@@ -46,7 +41,7 @@
     "electron-window-state": "^3.0.0"
   },
   "devDependencies": {
-    "electron-packager": "^7.0.0",
+    "electron-builder": "^3.10.9",
     "electron": "^1.4.7",
     "xo": "*"
   },
@@ -68,6 +63,15 @@
           "allowSingleLine": true
         }
       ]
+    }
+  },
+  "build": {
+    "appId": "me.wiehle.whatsdesktop",
+    "mac": {
+      "category": "public.app-category.social-networking"
+    },
+    "linux": {
+      "target": ["deb", "rpm", "AppImage"]
     }
   }
 }

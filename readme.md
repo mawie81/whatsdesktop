@@ -18,38 +18,7 @@ Enable the dark mode in the settings or tray menu.
 
 ## Install
 
-### OS X
-
-#### [Homebrew Cask](http://caskroom.io)
-
-```
-$ brew cask install whatsdesktop
-```
-
-#### Manually
-
-[**Download**](https://github.com/mawie81/whatsdesktop/releases/latest), unzip, and move `WhatsDesktop.app` to the `/Applications` directory.
-
-### Linux
-
-[**Download**](https://github.com/mawie81/whatsdesktop/releases/latest) and unzip to some location.
-
-To add a shortcut to the app, create a file in `~/.local/share/applications` called `whatsdesktop.desktop` with the following contents:
-
-```
-[Desktop Entry]
-Name=WhatsDesktop
-Exec=/full/path/to/folder/whatsdesktop
-Terminal=false
-Type=Application
-Icon=/full/path/to/folder/WhatsDesktop/resources/app/media/logo-symbol.png
-```
-
-### Windows
-
-[**Download**](https://github.com/mawie81/whatsdesktop/releases/latest) and unzip to some location.
-
-Run WhatsDesktop.exe
+[**Download**](https://github.com/mawie81/whatsdesktop/releases/latest) the version for your OS and run the installer.
 
 ## Dev
 
