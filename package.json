@@ -41,7 +41,7 @@
     "electron-window-state": "^3.0.0"
   },
   "devDependencies": {
-    "electron-builder": "^3.10.9",
+    "electron-builder": "^8.6.0",
     "electron": "^1.4.7",
     "xo": "*"
   },
