@@ -1,7 +1,7 @@
 {
   "name": "whatsdesktop",
   "productName": "WhatsDesktop",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "description": "Unofficial WhatsApp app",
   "license": "MIT",
   "repository": "mawie81/whatsdesktop",
@@ -11,13 +11,13 @@
     "url": "http://marcel.wiehle.me"
   },
   "engines": {
-    "node": ">=4"
+    "node": ">=6"
   },
   "electronVersion": "1.4.7",
   "scripts": {
     "test": "xo",
     "start": "electron .",
-    "build": "build -mwl"
+    "build": "electron-builder"
   },
   "files": [
     "index.js",
@@ -36,14 +36,16 @@
     "WhatsDesktop"
   ],
   "dependencies": {
-    "electron-config": "^0.1.1",
-    "electron-debug": "^0.2.1",
-    "electron-window-state": "^3.0.0"
+    "electron-config": "^2.0.0",
+    "electron-debug": "~3.1.0",
+    "electron-window-state": "~5.0.3",
+    "webpack": "^1.11.0"
   },
   "devDependencies": {
-    "electron-builder": "^8.6.0",
-    "electron": "^1.4.7",
-    "xo": "*"
+    "electron-builder": "^22.7.0",
+    "electron": "~8.4.0",
+    "fsevents": "^1.0.0",
+    "xo": "^0.32.1"
   },
   "xo": {
     "esnext": true,
@@ -71,7 +73,11 @@
       "category": "public.app-category.social-networking"
     },
     "linux": {
-      "target": ["deb", "rpm", "AppImage"]
+      "target": [
+        "deb",
+        "rpm",
+        "AppImage"
+      ]
     }
   }
 }

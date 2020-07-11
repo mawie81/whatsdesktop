@@ -11,7 +11,7 @@ let appIcon;
 function updateBadge(title) {
   const isOSX = Boolean(app.dock);
 
-  const messageCount = (/\(([0-9]+)\)/).exec(title);
+  const messageCount = (/\((\d+)\)/).exec(title);
 
   if (isOSX) {
     app.dock.setBadge(messageCount ? messageCount[1] : '');
@@ -56,17 +56,17 @@ function createMainWindow() {
   mainWindowState.manage(win);
 
   win.loadURL('https://web.whatsapp.com', {
-    userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.87 Safari/537.36'
+    userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.85 Safari/537.36'
   });
   win.on('closed', () => app.quit);
-  win.on('page-title-updated', (e, title) => updateBadge(title));
-  win.on('close', e => {
+  win.on('page-title-updated', (error, title) => updateBadge(title));
+  win.on('close', error => {
     if (process.platform === 'darwin' && !win.forceClose) {
-      e.preventDefault();
+      error.preventDefault();
       win.hide();
     } else if (process.platform === 'win32' && configStore.get('closeToTray')) {
       win.hide();
-      e.preventDefault();
+      error.preventDefault();
     }
   });
   win.on('minimize', () => {
@@ -100,8 +100,8 @@ app.on('ready', () => {
     mainWindow.show();
   });
 
-  page.on('new-window', (e, url) => {
-    e.preventDefault();
+  page.on('new-window', (error, url) => {
+    error.preventDefault();
     shell.openExternal(url);
   });
 

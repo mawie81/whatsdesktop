@@ -155,7 +155,8 @@ const darwinTpl = [
         role: 'selectall'
       }
     ]
-  }, {
+  },
+  {
     label: 'Settings',
     submenu: [
       {
