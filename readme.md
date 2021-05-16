@@ -26,11 +26,12 @@ Built with [Electron](http://electron.atom.io).
 
 ###### Commands
 
-- Init: `$ npm install`
-- Run: `$ npm start`
-- Build OS X: `$ npm run build-osx`
-- Build Linux: `$ npm run build-linux`
-- Build all: `$ npm run build` *(OS X only)*
+- Init: `$ yarn install`
+- Run: `$ yarn start`
+- Build OS X: `$ yarn build --mac`
+- Build Linux: `$ yarn build --linux`
+- Build Linux rpm: `$ yarn build --linux rpm`
+- Build all: `$ yarn build`
 
 
 ## License
