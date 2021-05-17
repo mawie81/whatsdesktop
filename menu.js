@@ -312,7 +312,7 @@ const helpSubmenu = [
   {
     label: `${appName} Website...`,
     click() {
-      shell.openExternal('https://github.com/mawie81/whatsdesktop');
+      shell.openExternal('https://github.com/sergiomb2/whatsdesktop');
     }
   },
   {
@@ -326,7 +326,7 @@ const helpSubmenu = [
 ${app.getName()} ${app.getVersion()}
 ${process.platform} ${process.arch} ${os.release()}`;
 
-      shell.openExternal(`https://github.com/mawie81/whatsdesktop/issues/new?body=${encodeURIComponent(body)}`);
+      shell.openExternal(`https://github.com/sergiomb2/whatsdesktop/issues/new?body=${encodeURIComponent(body)}`);
     }
   }
 ];

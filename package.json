@@ -1,14 +1,14 @@
 {
   "name": "whatsdesktop",
   "productName": "WhatsDesktop",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "description": "Unofficial WhatsApp app",
   "license": "MIT",
-  "repository": "mawie81/whatsdesktop",
+  "repository": "sergiomb2/whatsdesktop",
   "author": {
-    "name": "Marcel Wiehle",
-    "email": "marcel@wiehle.me",
-    "url": "http://marcel.wiehle.me"
+    "name": "Sérgio Basto",
+    "email": "sergio@serjux.com",
+    "url": "https://github.com/sergiomb2/whatsdesktop"
   },
   "engines": {
     "node": ">=6"
@@ -68,7 +68,7 @@
     }
   },
   "build": {
-    "appId": "me.wiehle.whatsdesktop",
+    "appId": "com.serjux.whatsdesktop",
     "mac": {
       "category": "public.app-category.social-networking"
     },

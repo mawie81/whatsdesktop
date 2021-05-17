@@ -7,18 +7,19 @@
 *<strong>Note:</strong> In order to use this app a WhatsApp Web compatible device is required.*
 
 <br>
-[![](media/screenshot.png)](https://github.com/mawie81/whatsdesktop/releases/latest)
+
+[![](media/screenshot.png)](https://github.com/sergiomb2/whatsdesktop/releases/latest)
 
 *Requires OS X 10.8+, Linux or Windows.*
 
 ## Dark mode
 
 Enable the dark mode in the settings or tray menu.
-[![](media/screenshot-dark.png)](https://github.com/mawie81/whatsdesktop/releases/latest)
+[![](media/screenshot-dark.png)](https://github.com/sergiomb2/whatsdesktop/releases/latest)
 
 ## Install
 
-[**Download**](https://github.com/mawie81/whatsdesktop/releases/latest) the version for your OS and run the installer.
+[**Download**](https://github.com/sergiomb2/whatsdesktop/releases/latest) the version for your OS and run the installer.
 
 ## Dev
 
@@ -36,4 +37,4 @@ Built with [Electron](http://electron.atom.io).
 
 ## License
 
-MIT © [Marcel Wiehle](http://marcel.wiehle.me)
+MIT © [Marcel Wiehle](http://marcel.wiehle.me) and Sérgio Basto
