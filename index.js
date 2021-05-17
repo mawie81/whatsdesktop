@@ -1,13 +1,14 @@
 'use strict';
 const path = require('path');
 const fs = require('fs');
-const {app, BrowserWindow, shell, Tray, Menu} = require('electron');
+const {app, BrowserWindow, shell, Tray, Menu, MenuItem} = require('electron');
 const appMenu = require('./menu');
 const configStore = require('./config');
 
 let mainWindow;
 let appIcon;
 
+//app.commandLine.appendSwitch('lang', 'pt-PT');
 function updateBadge(title) {
   const isOSX = Boolean(app.dock);
 
@@ -56,7 +57,7 @@ function createMainWindow() {
   mainWindowState.manage(win);
 
   win.loadURL('https://web.whatsapp.com', {
-    userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.85 Safari/537.36'
+    userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36'
   });
   win.on('closed', () => app.quit);
   win.on('page-title-updated', (error, title) => updateBadge(title));
@@ -87,12 +88,22 @@ function createTray() {
   });
 }
 
+
 app.on('ready', () => {
   Menu.setApplicationMenu(appMenu.mainMenu);
 
   mainWindow = createMainWindow();
   createTray();
 
+  console.log("locale=" + app.getLocale());
+  console.log("plataform=" + process.platform);
+
+  const ses = mainWindow.webContents.session
+  console.log(ses.getUserAgent());
+  const possibleLanguages = ses.availableSpellCheckerLanguages
+  console.log("possibleLanguages=" + possibleLanguages);
+
+  mainWindow.webContents.session.setSpellCheckerLanguages(['pt-PT']);
   const page = mainWindow.webContents;
 
   page.on('dom-ready', () => {
@@ -108,6 +119,29 @@ app.on('ready', () => {
   page.on('did-finish-load', () => {
     mainWindow.setTitle(app.getName());
   });
+
+mainWindow.webContents.on('context-menu', (event, params) => {
+  const menu = new Menu()
+
+  // Add each spelling suggestion
+  for (const suggestion of params.dictionarySuggestions) {
+    menu.append(new MenuItem({
+      label: suggestion,
+      click: () => mainWindow.webContents.replaceMisspelling(suggestion)
+    }))
+  }
+
+  // Allow users to add the misspelled word to the dictionary
+  if (params.misspelledWord) {
+    menu.append(
+      new MenuItem({
+        label: 'Add to dictionary',
+        click: () => mainWindow.webContents.session.addWordToSpellCheckerDictionary(params.misspelledWord)
+      })
+    )
+  }
+  menu.popup()
+});
 });
 
 app.on('window-all-closed', () => {
