@@ -44,7 +44,6 @@
   "devDependencies": {
     "electron-builder": "^22.10.5",
     "electron": "~12.0.6",
-    "fsevents": "^2.3.2",
     "xo": "^0.40.1"
   },
   "xo": {
