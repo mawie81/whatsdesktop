@@ -1,7 +1,10 @@
 dist: bionic
 language: node_js
-install: yarn
-check: echo "check ignored"
+install: yarn build
+addons:
+  apt:
+    packages:
+      - rpm
 cache:
   yarn: true
 node_js:
